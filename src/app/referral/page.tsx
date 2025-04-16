@@ -1,23 +1,23 @@
 'use client';
-import { useEffect } from 'react';
+
 import { useSearchParams, useRouter } from 'next/navigation';
+import { Suspense } from 'react';
+import SignupForm from '../signup/SignupForm'; 
 
-export default function ReferralRedirect() {
-  const router = useRouter();
+function SignupPageInner() {
   const searchParams = useSearchParams();
+  const router = useRouter();
+  const ref = searchParams.get('ref');
 
-  useEffect(() => {
-    const ref = searchParams.get('ref');
-    if (ref) {
-      router.replace(`/signup?ref=${ref}`);
-    } else {
-      router.replace('/signup');
-    }
-  }, [searchParams, router]);
+  return <SignupForm referralCode={ref} router={router} />;
+}
 
+export default function SignupPage() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-black text-white text-xl font-semibold">
-      Redirecting...
-    </div>
+    <Suspense fallback={<div className="text-white text-center">Loading signup...</div>}>
+      <SignupPageInner />
+    </Suspense>
   );
 }
+
+export const dynamic = 'force-dynamic';

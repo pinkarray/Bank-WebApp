@@ -1,14 +1,17 @@
 'use client';
-import { useState, useEffect } from 'react';
+
+import { useEffect, useState } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import axios from 'axios';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
+import { Suspense } from 'react';
 
-export default function SignupPage() {
+function SignupPageContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
+
   const [referralCode, setReferralCode] = useState<string>('');
   const [username, setUsername] = useState<string>('');
   const [email, setEmail] = useState<string>('');
@@ -55,7 +58,6 @@ export default function SignupPage() {
       router.push('/success');
     } catch (err: unknown) {
       if (axios.isAxiosError(err)) {
-        console.error('❌ Signup error:', err.response?.data);
         const msg =
           err.response?.data?.errors?.[0]?.msg ||
           err.response?.data?.message ||
@@ -102,7 +104,6 @@ export default function SignupPage() {
             onChange={(e) => setEmail(e.target.value)}
           />
 
-          {/* Password Field */}
           <div className="relative">
             <input
               className="w-full p-3 rounded bg-gray-800 border border-gray-600 text-white placeholder-gray-400 pr-10"
@@ -119,7 +120,6 @@ export default function SignupPage() {
             </span>
           </div>
 
-          {/* Confirm Password Field */}
           <div className="relative">
             <input
               className="w-full p-3 rounded bg-gray-800 border border-gray-600 text-white placeholder-gray-400 pr-10"
@@ -156,3 +156,13 @@ export default function SignupPage() {
     </div>
   );
 }
+
+export default function SignupPage() {
+  return (
+    <Suspense fallback={<div className="text-white text-center">Loading signup page...</div>}>
+      <SignupPageContent />
+    </Suspense>
+  );
+}
+
+export const dynamic = 'force-dynamic';

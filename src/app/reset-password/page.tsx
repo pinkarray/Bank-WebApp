@@ -1,12 +1,14 @@
 'use client';
-import { useState } from 'react';
+
+import { useState, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import axios from 'axios';
 
-export default function ResetPasswordPage() {
+function ResetPasswordContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const token = searchParams.get('token');
+
   const [password, setPassword] = useState('');
   const [confirm, setConfirm] = useState('');
   const [status, setStatus] = useState('');
@@ -17,11 +19,14 @@ export default function ResetPasswordPage() {
     if (password !== confirm) return setStatus('Passwords do not match.');
 
     try {
-      await axios.post('https://api.bankblockchain.net/api/auth/reset-password', { token, password });
-      setStatus('Password reset successful! Redirecting...');
-      setTimeout(() => router.push('/login'), 2500); // Or back to signup
+      await axios.post('https://api.bankblockchain.net/api/auth/reset-password', {
+        token,
+        password,
+      });
+      setStatus('✅ Password reset successful! Redirecting...');
+      setTimeout(() => router.push('/login'), 2500);
     } catch {
-      setStatus('Failed to reset password.');
+      setStatus('❌ Failed to reset password.');
     }
   };
 
@@ -54,3 +59,13 @@ export default function ResetPasswordPage() {
     </div>
   );
 }
+
+export default function ResetPasswordPage() {
+  return (
+    <Suspense fallback={<div className="text-white text-center">Loading form...</div>}>
+      <ResetPasswordContent />
+    </Suspense>
+  );
+}
+
+export const dynamic = 'force-dynamic';

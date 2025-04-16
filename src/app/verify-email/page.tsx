@@ -34,3 +34,4 @@ export default function EmailVerifiedPage() {
     </div>
   );
 }
+export const dynamic = 'force-dynamic';

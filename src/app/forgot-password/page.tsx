@@ -1,19 +1,25 @@
 'use client';
+
 import { useState } from 'react';
 import axios from 'axios';
 
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setLoading(true);
     setMessage('Sending reset link...');
+
     try {
       await axios.post('https://api.bankblockchain.net/api/auth/forgot-password', { email });
-      setMessage('Reset link sent! Check your inbox.');
+      setMessage('✅ Reset link sent! Check your inbox.');
     } catch {
-      setMessage('Failed to send reset email. Please try again.');
+      setMessage('❌ Failed to send reset email. Please try again.');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -31,8 +37,9 @@ export default function ForgotPasswordPage() {
         <button
           type="submit"
           className="w-full bg-yellow-400 text-black font-bold py-3 rounded hover:bg-yellow-500 transition"
+          disabled={loading}
         >
-          Send Reset Link
+          {loading ? 'Sending...' : 'Send Reset Link'}
         </button>
         {message && <p className="text-center mt-4 text-sm">{message}</p>}
       </form>

@@ -47,3 +47,4 @@ export default function SuccessPage() {
     </div>
   );
 }
+export const dynamic = 'force-dynamic';
