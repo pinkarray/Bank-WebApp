@@ -1,7 +1,6 @@
 'use client';
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import Image from 'next/image';
 import { motion } from 'framer-motion';
 
 export default function SuccessPage() {
@@ -23,13 +22,6 @@ export default function SuccessPage() {
         transition={{ duration: 0.6 }}
         className="text-center"
       >
-        <Image
-          src="/logo.jpg"
-          alt="Bank Blockchain Logo"
-          width={100}
-          height={100}
-          className="mb-6"
-        />
         <h1 className="text-2xl font-bold text-yellow-400 mb-4">
           🎉 Thank You for Signing Up!
         </h1>

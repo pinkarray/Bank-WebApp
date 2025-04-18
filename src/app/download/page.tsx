@@ -10,7 +10,7 @@ export default function DownloadPage() {
       </p>
 
       <Link
-        href="https://download.bankblockchain.net/BankBlockChain.apk"
+        href="https://expo.dev/accounts/devmide/projects/bank-block-chain/builds/4b22d1e5-1b97-463b-8107-a6f7314de637"
         className="bg-yellow-400 text-black font-bold py-3 px-6 rounded hover:bg-yellow-500 transition"
         download
       >
