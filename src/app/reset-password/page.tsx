@@ -21,7 +21,7 @@ function ResetPasswordContent() {
     try {
       await axios.post('https://api.bankblockchain.net/api/auth/reset-password', {
         token,
-        password,
+        newPassword: password,
       });
       setStatus('✅ Password reset successful! Redirecting...');
       setTimeout(() => router.push('/login'), 2500);
