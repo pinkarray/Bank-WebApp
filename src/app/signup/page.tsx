@@ -1,5 +1,6 @@
 'use client';
 
+import Head from 'next/head';
 import { useEffect, useState } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
@@ -11,7 +12,7 @@ import { Suspense } from 'react';
 function SignupPageContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
-
+  const [referrerUsername, setReferrerUsername] = useState<string | null>(null);
   const [referralCode, setReferralCode] = useState<string>('');
   const [username, setUsername] = useState<string>('');
   const [email, setEmail] = useState<string>('');
@@ -26,8 +27,20 @@ function SignupPageContent() {
 
   useEffect(() => {
     const ref = searchParams.get('ref');
-    if (ref) setReferralCode(ref);
-  }, [searchParams]);
+    if (ref) {
+      setReferralCode(ref);
+  
+      // ✅ Attempt to fetch inviter username
+      axios.get(`${API_BASE_URL}/referrals/${ref}`)
+        .then(res => {
+          const username = res.data?.username;
+          if (username) setReferrerUsername(username);
+        })
+        .catch(err => {
+          console.warn("⚠️ Invalid referral code or username not found.");
+        });
+    }
+  }, [searchParams]);  
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -87,6 +100,12 @@ function SignupPageContent() {
         <h1 className="text-2xl font-bold mb-6 text-center text-yellow-400">Create an Account</h1>
 
         {error && <p className="text-red-500 mb-4 text-center">{error}</p>}
+
+        {referrerUsername && (
+          <div className="bg-yellow-100 border border-yellow-300 text-yellow-800 p-3 rounded mb-4 text-center">
+            🎉 You were invited by <strong>@{referrerUsername}</strong>. Complete your signup to start mining!
+          </div>
+        )}
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
@@ -159,9 +178,30 @@ function SignupPageContent() {
 
 export default function SignupPage() {
   return (
-    <Suspense fallback={<div className="text-white text-center">Loading signup page...</div>}>
-      <SignupPageContent />
-    </Suspense>
+    <>
+      <Head>
+        <title>Join Bank Blockchain – Earn with Your Network</title>
+        <meta name="description" content="Sign up and start mining with Bank Blockchain. Use your referral code to invite friends and earn rewards!" />
+        
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://bankblockchain.net/signup" />
+        <meta property="og:title" content="Join Bank Blockchain – Earn with Your Network" />
+        <meta property="og:description" content="Sign up and start mining with Bank Blockchain. Use your referral code to invite friends and earn rewards!" />
+        <meta property="og:image" content="https://bankblockchain.net/og-image-1200x630.png" />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:url" content="https://bankblockchain.net/signup" />
+        <meta name="twitter:title" content="Join Bank Blockchain – Earn with Your Network" />
+        <meta name="twitter:description" content="Sign up and start mining with Bank Blockchain. Use your referral code to invite friends and earn rewards!" />
+        <meta name="twitter:image" content="https://bankblockchain.net/logo.jpg" />
+      </Head>
+
+      <Suspense fallback={<div className="text-white text-center">Loading signup page...</div>}>
+        <SignupPageContent />
+      </Suspense>
+    </>
   );
 }
 
