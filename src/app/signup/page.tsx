@@ -182,20 +182,16 @@ export default function SignupPage() {
       <Head>
         <title>Join Bank Blockchain – Earn with Your Network</title>
         <meta name="description" content="Sign up and start mining with Bank Blockchain. Use your referral code to invite friends and earn rewards!" />
-        
-        {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://bankblockchain.net/signup" />
         <meta property="og:title" content="Join Bank Blockchain – Earn with Your Network" />
         <meta property="og:description" content="Sign up and start mining with Bank Blockchain. Use your referral code to invite friends and earn rewards!" />
         <meta property="og:image" content="https://bankblockchain.net/og-image-1200x630.png" />
-
-        {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:url" content="https://bankblockchain.net/signup" />
         <meta name="twitter:title" content="Join Bank Blockchain – Earn with Your Network" />
         <meta name="twitter:description" content="Sign up and start mining with Bank Blockchain. Use your referral code to invite friends and earn rewards!" />
-        <meta name="twitter:image" content="https://bankblockchain.net/logo.jpg" />
+        <meta name="twitter:image" content="https://bankblockchain.net/og-image-1200x630.png" />
       </Head>
 
       <Suspense fallback={<div className="text-white text-center">Loading signup page...</div>}>
