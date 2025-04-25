@@ -37,7 +37,7 @@ function SignupPageContent() {
           if (username) setReferrerUsername(username);
         })
         .catch(err => {
-          console.warn("⚠️ Invalid referral code or username not found.");
+          console.warn("⚠️ Invalid referral code or username not found.", err);
         });
     }
   }, [searchParams]);  
