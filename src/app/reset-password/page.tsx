@@ -26,8 +26,7 @@ function ResetPasswordContent() {
         token,
         newPassword: password,
       });
-      setStatus('✅ Password reset successful! Redirecting...');
-      setTimeout(() => router.push('/login'), 2500);
+      setStatus('✅ Password reset successful! You can now log in with your new password.');
     } catch {
       setStatus('❌ Failed to reset password.');
     }
