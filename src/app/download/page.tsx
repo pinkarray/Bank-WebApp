@@ -10,7 +10,7 @@ export default function DownloadPage() {
       </p>
 
       <Link
-        href="https://expo.dev/accounts/devmide/projects/bank-block-chain/builds/5712f835-553f-41d7-a017-b7cbbfe98a3d"
+        href="https://expo.dev/accounts/devbuild/projects/bank-block-chain/builds/2958730f-8b0c-4e3d-bcd9-0eb7a0fe952a"
         className="bg-yellow-400 text-black font-bold py-3 px-6 rounded hover:bg-yellow-500 transition"
         download
       >
