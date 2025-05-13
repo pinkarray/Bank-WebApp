@@ -1,13 +1,13 @@
 'use client';
 
 import { useState, Suspense } from 'react';
-import { useSearchParams, useRouter } from 'next/navigation';
+import { useSearchParams, /* useRouter */ } from 'next/navigation';
 import axios from 'axios';
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/solid'; // ← if using Heroicons
 
 function ResetPasswordContent() {
   const searchParams = useSearchParams();
-  const router = useRouter();
+  // const router = useRouter();
   const token = searchParams.get('token');
 
   const [password, setPassword] = useState('');
