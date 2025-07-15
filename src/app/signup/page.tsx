@@ -30,14 +30,13 @@ function SignupPageContent() {
     if (ref) {
       setReferralCode(ref);
   
-      // ✅ Attempt to fetch inviter username
       axios.get(`${API_BASE_URL}/referrals/${ref}`)
         .then(res => {
           const username = res.data?.username;
           if (username) setReferrerUsername(username);
         })
         .catch(err => {
-          console.warn("⚠️ Invalid referral code or username not found.", err);
+          console.warn("Invalid referral code or username not found.", err);
         });
     }
   }, [searchParams]);  
@@ -67,7 +66,7 @@ function SignupPageContent() {
         referralCode: referralCode || null,
       });
 
-      console.log('✅ Signup success:', response.data);
+      console.log('Signup success:', response.data);
       router.push('/success');
     } catch (err: unknown) {
       if (axios.isAxiosError(err)) {

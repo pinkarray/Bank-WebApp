@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation';
 
 interface SignupFormProps {
   referralCode: string | null;
-  router: ReturnType<typeof useRouter>; // ✅ correct and safe type
+  router: ReturnType<typeof useRouter>; 
 }
 
   export default function SignupForm({ referralCode, router }: SignupFormProps) {
@@ -47,7 +47,7 @@ interface SignupFormProps {
         referralCode: referralCode || null,
       });
 
-      console.log('✅ Signup success:', response.data);
+      console.log('Signup success:', response.data);
       router.push('/success');
     } catch (err: unknown) {
         if (axios.isAxiosError(err)) {
@@ -57,7 +57,7 @@ interface SignupFormProps {
             'Something went wrong.';
           setError(msg);
         } else {
-          console.error('❌ Unknown error:', err);
+          console.error('Unknown error:', err);
           setError('Something went wrong.');
         }
     }

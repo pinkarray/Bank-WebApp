@@ -3,7 +3,7 @@
 import { useState, Suspense } from 'react';
 import { useSearchParams, /* useRouter */ } from 'next/navigation';
 import axios from 'axios';
-import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/solid'; // ← if using Heroicons
+import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/solid';
 
 function ResetPasswordContent() {
   const searchParams = useSearchParams();
@@ -26,9 +26,9 @@ function ResetPasswordContent() {
         token,
         newPassword: password,
       });
-      setStatus('✅ Password reset successful! You can now log in with your new password.');
+      setStatus('Password reset successful! You can now log in with your new password.');
     } catch {
-      setStatus('❌ Failed to reset password.');
+      setStatus('Failed to reset password.');
     }
   };
 
@@ -36,7 +36,6 @@ function ResetPasswordContent() {
     <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center p-6">
       <h1 className="text-2xl font-bold text-yellow-400 mb-4">Reset Your Password</h1>
       <form onSubmit={handleReset} className="space-y-4 w-full max-w-md">
-        {/* New Password Field */}
         <div className="relative">
           <input
             type={showPassword ? 'text' : 'password'}
@@ -54,7 +53,6 @@ function ResetPasswordContent() {
           </button>
         </div>
 
-        {/* Confirm Password Field */}
         <div className="relative">
           <input
             type={showConfirm ? 'text' : 'password'}

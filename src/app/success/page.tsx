@@ -9,7 +9,7 @@ export default function SuccessPage() {
   useEffect(() => {
     const timer = setTimeout(() => {
       router.push('https://download.bankblockchain.net/');
-    }, 3000); // 3 seconds before redirect
+    }, 3000); 
 
     return () => clearTimeout(timer);
   }, [router]);

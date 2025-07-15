@@ -15,9 +15,9 @@ export default function ForgotPasswordPage() {
 
     try {
       await axios.post('https://api.bankblockchain.net/api/auth/forgot-password', { email });
-      setMessage('✅ Reset link sent! Check your inbox.');
+      setMessage('Reset link sent! Check your inbox.');
     } catch {
-      setMessage('❌ Failed to send reset email. Please try again.');
+      setMessage('Failed to send reset email. Please try again.');
     } finally {
       setLoading(false);
     }
